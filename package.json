@@ -32,7 +32,6 @@
     "build": "npm run build:ts && npm run build:json-schema",
     "build:ts": "tsc",
     "build:json-schema": "tsx scripts/build.ts",
-    "build:schema": "npm run build:json-schema",
     "test": "node --test --import tsx --experimental-test-coverage test/*.test.ts",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf lib dist"
