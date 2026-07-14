@@ -1,4 +1,4 @@
-# trailscript-event-schema
+# trailscript-event-schema [![CI](https://github.com/nachee/trailscript-event-schema/actions/workflows/ci.yml/badge.svg)](https://github.com/nachee/trailscript-event-schema/actions/workflows/ci.yml)
 
 The canonical schema for user-interaction **events** and **DOM checkpoints** — one Zod source of
 truth, compiled to **JSON Schema** and **Pydantic v2** models so a TypeScript tracker and a Python
