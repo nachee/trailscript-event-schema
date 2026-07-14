@@ -5,9 +5,11 @@ truth, compiled to **JSON Schema** and **Pydantic v2** models so a TypeScript tr
 analysis service validate against the exact same contract.
 
 This is the shared boundary type extracted from **TrailScript**, an automated E2E-test-generation
-product. A browser tracker emits events in this shape; the analysis pipeline
-([`trailscript-testgen`](../trailscript-testgen)) reads them back typed. Defining that contract
-once, in one language, and generating the rest keeps the two ends from drifting.
+product. A browser tracker ([`trailscript-tracker`](https://github.com/nachee/trailscript-tracker))
+emits events in this shape; the analysis pipeline
+([`trailscript-testgen`](https://github.com/nachee/trailscript-testgen)) reads them back typed.
+Defining that contract once, in one language, and generating the rest keeps the two ends from
+drifting.
 
 ```
         src/*.ts  (Zod — single source of truth)
