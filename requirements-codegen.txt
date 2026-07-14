@@ -1,0 +1,5 @@
+# Python tools for the schema codegen pipeline.
+# Installed into .codegen-venv/ by `make python-codegen` — never into a
+# service runtime venv. Generates Pydantic v2 models from the JSON Schemas
+# at dist/.
+datamodel-code-generator>=0.25.0,<0.30.0

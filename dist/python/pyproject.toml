@@ -1,0 +1,16 @@
+[project]
+name = "trailscript-event-schema"
+version = "0.1.0"
+description = "Pydantic v2 models generated from trailscript-event-schema (Zod source)"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0,<3.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["event_schema*"]

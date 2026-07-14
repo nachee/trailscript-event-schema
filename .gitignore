@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# TS build output (regenerate with `npm run build`)
+lib/
+
+# Python codegen venv
+.codegen-venv/
+__pycache__/
+*.egg-info/
+
+# Env / secrets
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

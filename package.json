@@ -1,0 +1,49 @@
+{
+  "name": "trailscript-event-schema",
+  "version": "0.1.0",
+  "description": "Canonical user-interaction event & DOM-checkpoint schema. A single Zod source of truth, compiled to JSON Schema and Pydantic v2 models so TypeScript and Python services share one contract.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./json-schema": "./dist/event.schema.json",
+    "./checkpoint-json-schema": "./dist/checkpoint.schema.json"
+  },
+  "files": [
+    "lib",
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "zod",
+    "json-schema",
+    "pydantic",
+    "schema",
+    "contract",
+    "codegen",
+    "single-source-of-truth"
+  ],
+  "scripts": {
+    "build": "npm run build:ts && npm run build:json-schema",
+    "build:ts": "tsc",
+    "build:json-schema": "tsx scripts/build.ts",
+    "build:schema": "npm run build:json-schema",
+    "test": "node --test --import tsx --experimental-test-coverage test/**/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf lib dist"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.4.0",
+    "zod-to-json-schema": "^3.23.0"
+  }
+}

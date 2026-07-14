@@ -1,0 +1,355 @@
+{
+  "$ref": "#/definitions/Checkpoint",
+  "definitions": {
+    "Checkpoint": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "checkpoint_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "trigger_event_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string"
+        },
+        "visible_elements": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "selectors": {
+                    "type": "object",
+                    "properties": {
+                      "css": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "xpath": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "text": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "role": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "role": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "role",
+                              "name"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "testid": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "nth": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "selector": {
+                                "type": "string"
+                              },
+                              "index": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "selector",
+                              "index"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "placeholder": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "css",
+                      "xpath",
+                      "text",
+                      "role",
+                      "testid",
+                      "nth",
+                      "placeholder"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tag": {
+                    "type": "string"
+                  },
+                  "text_content": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "is_visible": {
+                    "type": "boolean"
+                  },
+                  "bounding_box": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "width": {
+                            "type": "number"
+                          },
+                          "height": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "width",
+                          "height"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "computed_styles": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "selectors",
+                  "tag",
+                  "text_content",
+                  "is_visible",
+                  "bounding_box",
+                  "computed_styles"
+                ],
+                "additionalProperties": false
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "form_values": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "selectors": {
+                    "$ref": "#/definitions/Checkpoint/properties/visible_elements/anyOf/0/items/properties/selectors"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "checked": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "selectors",
+                  "value",
+                  "checked",
+                  "disabled",
+                  "type"
+                ],
+                "additionalProperties": false
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focused_element": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "selectors": {
+                  "$ref": "#/definitions/Checkpoint/properties/visible_elements/anyOf/0/items/properties/selectors"
+                }
+              },
+              "required": [
+                "selectors"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "page_title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "recent_api_calls": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "integer"
+                  },
+                  "duration_ms": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "request_body_summary": {
+                    "type": "string"
+                  },
+                  "response_body_summary": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "method",
+                  "url",
+                  "status"
+                ],
+                "additionalProperties": false
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "console_errors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "level": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "level",
+                  "message"
+                ],
+                "additionalProperties": false
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "full_snapshot_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "checkpoint_id",
+        "session_id",
+        "trigger_event_id",
+        "timestamp",
+        "url"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

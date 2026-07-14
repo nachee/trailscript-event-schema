@@ -1,0 +1,2286 @@
+{
+  "$ref": "#/definitions/Event",
+  "definitions": {
+    "Event": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "type": "number",
+              "const": 1
+            },
+            "event_id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "session_id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "tab_id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "sequence": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "page": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "viewport": {
+                  "type": "object",
+                  "properties": {
+                    "width": {
+                      "type": "integer"
+                    },
+                    "height": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "width",
+                    "height"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            },
+            "target": {
+              "type": "object",
+              "properties": {
+                "selectors": {
+                  "type": "object",
+                  "properties": {
+                    "css": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "xpath": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "text": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "role": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "role": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "role",
+                            "name"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "testid": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "nth": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "selector": {
+                              "type": "string"
+                            },
+                            "index": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "selector",
+                            "index"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "placeholder": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "css",
+                    "xpath",
+                    "text",
+                    "role",
+                    "testid",
+                    "nth",
+                    "placeholder"
+                  ],
+                  "additionalProperties": false
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "attributes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "text_content": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "bounding_box": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        },
+                        "width": {
+                          "type": "number"
+                        },
+                        "height": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "width",
+                        "height"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "is_in_iframe": {
+                  "type": "boolean"
+                },
+                "iframe_selector": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "selectors",
+                "tag",
+                "attributes",
+                "text_content",
+                "bounding_box",
+                "is_in_iframe",
+                "iframe_selector"
+              ],
+              "additionalProperties": false
+            },
+            "event_type": {
+              "type": "string",
+              "const": "click"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "modifiers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "Shift",
+                      "Ctrl",
+                      "Alt",
+                      "Meta"
+                    ]
+                  }
+                },
+                "force": {
+                  "type": "boolean"
+                },
+                "button": {
+                  "type": "string",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "position": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "dblclick"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "modifiers": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/modifiers/items"
+                  }
+                },
+                "position": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "right_click"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "modifiers": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/modifiers/items"
+                  }
+                },
+                "position": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "hover"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "drag_drop"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "target_selectors": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/target/properties/selectors"
+                },
+                "source_position": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                },
+                "target_position": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "required": [
+                "target_selectors"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/target"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "event_type": {
+              "type": "string",
+              "const": "scroll"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "delta_x": {
+                  "type": "number"
+                },
+                "delta_y": {
+                  "type": "number"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "up",
+                    "down",
+                    "left",
+                    "right"
+                  ]
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "direction"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "fill"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "clear"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "previous_value": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "press_key"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "repeat": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "type_sequentially"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "delay": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "select_option"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "check"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "checked": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "checked"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "focus"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "clipboard"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "copy",
+                    "cut",
+                    "paste"
+                  ]
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "action"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "navigation"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "to_url": {
+                  "type": "string"
+                },
+                "from_url": {
+                  "type": "string"
+                },
+                "trigger": {
+                  "type": "string",
+                  "enum": [
+                    "link_click",
+                    "form_submit",
+                    "js_redirect",
+                    "history_push",
+                    "history_pop"
+                  ]
+                }
+              },
+              "required": [
+                "to_url",
+                "trigger"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "page_load"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "load_state": {
+                  "type": "string",
+                  "enum": [
+                    "domcontentloaded",
+                    "networkidle",
+                    "load"
+                  ]
+                }
+              },
+              "required": [
+                "load_state"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "reload"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "tab_open"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "opener_tab_id": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "url",
+                "opener_tab_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "tab_close"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "history_change"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "pushState",
+                    "replaceState",
+                    "popstate"
+                  ]
+                }
+              },
+              "required": [
+                "url",
+                "type"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "file_upload"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "filenames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mimes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "sizes": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              },
+              "required": [
+                "filenames",
+                "mimes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "download"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "filename": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "filename"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "media_play"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "element_type": {
+                  "type": "string",
+                  "enum": [
+                    "video",
+                    "audio"
+                  ]
+                },
+                "src": {
+                  "type": "string"
+                },
+                "current_time": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "element_type",
+                "src"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "media_pause"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "element_type": {
+                  "$ref": "#/definitions/Event/anyOf/22/properties/payload/properties/element_type"
+                },
+                "current_time": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "element_type",
+                "current_time"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "dialog"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "dialog_type": {
+                  "type": "string",
+                  "enum": [
+                    "alert",
+                    "confirm",
+                    "prompt",
+                    "beforeunload"
+                  ]
+                },
+                "message": {
+                  "type": "string"
+                },
+                "response": {
+                  "type": "string",
+                  "enum": [
+                    "OK",
+                    "Cancel"
+                  ]
+                },
+                "input_value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dialog_type",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "permission_prompt"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "permission": {
+                  "type": "string",
+                  "enum": [
+                    "geolocation",
+                    "notifications",
+                    "camera",
+                    "microphone"
+                  ]
+                },
+                "response": {
+                  "type": "string",
+                  "enum": [
+                    "grant",
+                    "deny"
+                  ]
+                }
+              },
+              "required": [
+                "permission",
+                "response"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "api_request"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "enum": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE",
+                    "HEAD",
+                    "OPTIONS"
+                  ]
+                },
+                "url": {
+                  "type": "string"
+                },
+                "request_headers": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "request_body": {},
+                "status": {
+                  "type": "integer"
+                },
+                "response_body": {},
+                "duration_ms": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "method",
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "api_error"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "$ref": "#/definitions/Event/anyOf/26/properties/payload/properties/method"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "integer"
+                },
+                "error_message": {
+                  "type": "string"
+                },
+                "response_body": {}
+              },
+              "required": [
+                "method",
+                "url",
+                "status"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "websocket_message"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "sent",
+                    "received"
+                  ]
+                },
+                "data": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url",
+                "direction",
+                "data"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "tap"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "required": [
+                "position"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "target",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "swipe"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "left",
+                    "right",
+                    "up",
+                    "down"
+                  ]
+                },
+                "start": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                },
+                "end": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "required": [
+                "direction",
+                "start",
+                "end"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/schema_version"
+            },
+            "event_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/event_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/session_id"
+            },
+            "tab_id": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/tab_id"
+            },
+            "sequence": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/sequence"
+            },
+            "timestamp": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/timestamp"
+            },
+            "page": {
+              "$ref": "#/definitions/Event/anyOf/0/properties/page"
+            },
+            "target": {
+              "$ref": "#/definitions/Event/anyOf/5/properties/target"
+            },
+            "event_type": {
+              "type": "string",
+              "const": "pinch_zoom"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "scale": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "center": {
+                  "$ref": "#/definitions/Event/anyOf/0/properties/payload/properties/position"
+                }
+              },
+              "required": [
+                "scale",
+                "center"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema_version",
+            "event_id",
+            "session_id",
+            "tab_id",
+            "sequence",
+            "timestamp",
+            "page",
+            "event_type",
+            "payload"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
