@@ -161,16 +161,26 @@
                 "attributes": {
                   "type": "object",
                   "additionalProperties": {
-                    "type": [
-                      "string",
-                      "null"
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      {
+                        "type": "null"
+                      }
                     ]
                   }
                 },
                 "text_content": {
-                  "type": [
-                    "string",
-                    "null"
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 500
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "bounding_box": {
@@ -1920,11 +1930,17 @@
                     "type": "string"
                   }
                 },
-                "request_body": {},
+                "request_body": {
+                  "type": "string",
+                  "maxLength": 2048
+                },
                 "status": {
                   "type": "integer"
                 },
-                "response_body": {},
+                "response_body": {
+                  "type": "string",
+                  "maxLength": 2048
+                },
                 "duration_ms": {
                   "type": "number",
                   "minimum": 0
@@ -1996,7 +2012,10 @@
                 "error_message": {
                   "type": "string"
                 },
-                "response_body": {}
+                "response_body": {
+                  "type": "string",
+                  "maxLength": 2048
+                }
               },
               "required": [
                 "method",
@@ -2064,7 +2083,8 @@
                   ]
                 },
                 "data": {
-                  "type": "string"
+                  "type": "string",
+                  "maxLength": 8192
                 }
               },
               "required": [

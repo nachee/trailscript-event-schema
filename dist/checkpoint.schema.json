@@ -129,9 +129,14 @@
                     "type": "string"
                   },
                   "text_content": {
-                    "type": [
-                      "string",
-                      "null"
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 500
+                      },
+                      {
+                        "type": "null"
+                      }
                     ]
                   },
                   "is_visible": {
@@ -285,10 +290,12 @@
                     "minimum": 0
                   },
                   "request_body_summary": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 2048
                   },
                   "response_body_summary": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 2048
                   }
                 },
                 "required": [
@@ -315,7 +322,8 @@
                     "type": "string"
                   },
                   "message": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 500
                   },
                   "source": {
                     "type": "string"

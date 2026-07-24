@@ -11,7 +11,7 @@ const baseEnvelope = {
   timestamp: "2026-05-06T12:00:00.000Z",
   page: {
     url: "https://app.example.com/",
-    title: "TrailScript test page",
+    title: "trailscript test page",
     viewport: { width: 1280, height: 800 },
   },
 } as const;
