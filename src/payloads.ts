@@ -179,13 +179,21 @@ export const HttpMethodSchema = z.enum([
   "OPTIONS",
 ]);
 
+// P1-4: HTTP bodies are captured as bounded string summaries, never raw
+// unbounded/untyped values (which permitted arbitrary-size PII to pass the
+// schema). Mirrors the checkpoint `request_body_summary` shape.
+export const MAX_BODY_SUMMARY_LEN = 2048;
+// P1-4: websocket frame payloads are capped so a chatty socket can't stream an
+// unbounded string through the schema.
+export const MAX_WEBSOCKET_DATA_LEN = 8192;
+
 export const ApiRequestPayload = z.object({
   method: HttpMethodSchema,
   url: z.string(),
   request_headers: z.record(z.string(), z.string()).optional(),
-  request_body: z.unknown().optional(),
+  request_body: z.string().max(MAX_BODY_SUMMARY_LEN).optional(),
   status: z.number().int().optional(),
-  response_body: z.unknown().optional(),
+  response_body: z.string().max(MAX_BODY_SUMMARY_LEN).optional(),
   duration_ms: z.number().nonnegative().optional(),
 });
 
@@ -194,13 +202,13 @@ export const ApiErrorPayload = z.object({
   url: z.string(),
   status: z.number().int(),
   error_message: z.string().optional(),
-  response_body: z.unknown().optional(),
+  response_body: z.string().max(MAX_BODY_SUMMARY_LEN).optional(),
 });
 
 export const WebsocketMessagePayload = z.object({
   url: z.string(),
   direction: z.enum(["sent", "received"]),
-  data: z.string(),
+  data: z.string().max(MAX_WEBSOCKET_DATA_LEN),
 });
 
 // =============================================================================

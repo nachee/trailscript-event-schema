@@ -1,6 +1,10 @@
 import { z } from "zod";
 import { SCHEMA_VERSION } from "./version.js";
-import { BoundingBoxSchema, SelectorsSchema } from "./primitives.js";
+import { BoundingBoxSchema, MAX_TEXT_CONTENT_LEN, SelectorsSchema } from "./primitives.js";
+
+// P1-4: diagnostic message ceiling — mirrors the tracker's capture-time cap on
+// console/error/dialog text (services/tracker/src/normalisation/redact.js).
+export const MAX_MESSAGE_LEN = 500;
 
 // =============================================================================
 // Component schemas
@@ -9,7 +13,7 @@ import { BoundingBoxSchema, SelectorsSchema } from "./primitives.js";
 export const VisibleElementSchema = z.object({
   selectors: SelectorsSchema,
   tag: z.string(),
-  text_content: z.string().nullable(),
+  text_content: z.string().max(MAX_TEXT_CONTENT_LEN).nullable(),
   is_visible: z.boolean(),
   bounding_box: BoundingBoxSchema.nullable(),
   computed_styles: z.record(z.string(), z.string()).nullable(),
@@ -30,19 +34,23 @@ export const FocusedElementSchema = z.object({
 });
 export type FocusedElement = z.infer<typeof FocusedElementSchema>;
 
+// P1-4: body summaries are the canonical bounded shape for captured HTTP bodies
+// (mirrored by the api_request/api_error payload bodies). Cap at 2048 chars.
+export const MAX_BODY_SUMMARY_LEN = 2048;
+
 export const RecentApiCallSchema = z.object({
   method: z.string(),
   url: z.string(),
   status: z.number().int(),
   duration_ms: z.number().nonnegative().optional(),
-  request_body_summary: z.string().optional(),
-  response_body_summary: z.string().optional(),
+  request_body_summary: z.string().max(MAX_BODY_SUMMARY_LEN).optional(),
+  response_body_summary: z.string().max(MAX_BODY_SUMMARY_LEN).optional(),
 });
 export type RecentApiCall = z.infer<typeof RecentApiCallSchema>;
 
 export const ConsoleErrorSchema = z.object({
   level: z.string(),
-  message: z.string(),
+  message: z.string().max(MAX_MESSAGE_LEN),
   source: z.string().optional(),
 });
 export type ConsoleError = z.infer<typeof ConsoleErrorSchema>;
